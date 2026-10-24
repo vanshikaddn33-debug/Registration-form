@@ -1,18 +1,20 @@
 
+
 const Student = require("../models/student");
 
 const registerStudent = async (req, res) => {
   try {
-    console.log("Request body:", req.body);
-
     const {
       name,
       studentId,
       gender,
       branch,
       residence,
-      contactNo,
+      phoneNo,
       email,
+      githubUsername,
+      year,
+      laptop,
     } = req.body || {};
 
     const fields = {
@@ -21,12 +23,15 @@ const registerStudent = async (req, res) => {
       gender,
       branch,
       residence,
-      contactNo,
+      phoneNo,
       email,
+      githubUsername,
+      year,
+      laptop,
     };
 
     const missingFields = Object.entries(fields)
-      .filter(([key, value]) =>
+      .filter(([, value]) =>
         typeof value !== "string" || !value.trim()
       )
       .map(([key]) => key);
@@ -60,8 +65,11 @@ const registerStudent = async (req, res) => {
       gender,
       branch: branch.trim(),
       residence,
-      contactNo: contactNo.trim(),
+      phoneNo: phoneNo.trim(),
       email: normalizedEmail,
+      githubUsername: githubUsername.trim(),
+      year,
+      laptop,
     });
 
     return res.status(201).json({
@@ -73,7 +81,7 @@ const registerStudent = async (req, res) => {
 
     if (error.code === 11000) {
       return res.status(409).json({
-        message: "Student ID or email is already registered",
+        message: "Student ID, email, or another unique field is already registered",
       });
     }
 

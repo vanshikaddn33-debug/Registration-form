@@ -40,11 +40,15 @@ const studentSchema = new mongoose.Schema(
       },
     },
 
-    contactNo: {
-      type: String,
-      required: [true, "Contact number is required"],
-      trim: true,
-    },
+    phoneNo: {
+     type: String,
+    required: [true, "Phone number is required"],
+     trim: true,
+    match: [
+      /^[6-9]\d{9}$/,
+      "Enter a valid 10-digit Indian mobile number"
+    ],
+},
 
     email: {
       type: String,
@@ -52,6 +56,31 @@ const studentSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
       trim: true,
+    },
+    githubUsername: {
+      type: String,
+      required: [true, "GitHub username is required"],
+      trim: true,
+      match: [
+      /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i,
+      "Enter a valid GitHub username format",
+     ],
+},
+    year: {
+      type: String,
+      required: [true, "Year is required"],
+      enum: {
+        values: ["2nd Year", "3rd Year", "4th Year"],
+        message: "Invalid year",
+      },
+    },
+    laptop: {
+      type: String,
+      required: [true, "Laptop is required"],
+      enum: {
+        values: ["Yes", "No"],
+        message: "Invalid laptop option",
+      },
     },
   },
   {
