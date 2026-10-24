@@ -1,0 +1,22 @@
+@import 'tailwindcss';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #101510;
+  color: #e5e7df;
+}
+
+input,
+select {
+  color-scheme: dark;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
