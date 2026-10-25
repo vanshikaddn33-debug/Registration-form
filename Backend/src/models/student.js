@@ -92,12 +92,12 @@ branch: {
      ],
 },
     year: {
-      type: String,
+        type: String,
       required: [true, "Year is required"],
       enum: {
-        values: ["2nd Year", "3rd Year", "4th Year"],
-        message: "Invalid year",
-      },
+      values: ["1st Year", "2nd Year", "3rd Year", "4th Year"],
+      message: "Invalid year",
+   },
     },
     laptop: {
       type: String,
