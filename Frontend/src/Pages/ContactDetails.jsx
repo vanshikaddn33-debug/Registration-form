@@ -1,5 +1,6 @@
 import { ArrowLeft, ArrowRight, Code2, Phone } from 'lucide-react'
 import ReCAPTCHA from 'react-google-recaptcha'
+import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import Layout from '../Components/Layout'
 
@@ -11,16 +12,48 @@ const ContactDetails = ({
 }) => {
   const navigate = useNavigate()
 
- const handleSubmit = (event) => {
-  event.preventDefault()
+   const handleSubmit = async (event) => {
+    event.preventDefault()
 
-  if (!captchaToken) {
-    alert('Please complete the reCAPTCHA verification.')
-    return
+    if (!captchaToken) {
+      alert('Please complete the reCAPTCHA verification.')
+      return
+    }
+
+    const registrationData = {
+      name: formData.name,
+      studentId: formData.studentId,
+      gender: formData.gender,
+      branch: formData.branch,
+      residence: formData.residence,
+      phoneNo: formData.phone,
+      email: formData.email,
+      githubUsername: formData.github,
+      year: formData.year,
+      laptop: formData.laptop,
+      captchaToken: captchaToken,
+    }
+
+    try {
+      const response = await axios.post(
+        'http://localhost:5000/api/students/register',
+        registrationData
+      )
+
+      console.log('Registration successful:', response.data)
+      navigate('/success')
+    } catch (error) {
+      console.error(
+        'Registration failed:',
+        error.response?.data || error.message
+      )
+
+      alert(
+        error.response?.data?.message ||
+          'Registration failed. Please try again.'
+      )
+    }
   }
-
-  navigate('/success')
-}
 
   const inputStyle =
     'mt-2 w-full border border-gray-700 bg-[#171e18] px-3 py-2.5 text-sm text-white outline-none transition focus:border-green-500'
