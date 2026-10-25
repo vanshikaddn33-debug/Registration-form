@@ -118,15 +118,20 @@ const Registration = ({ formData, updateForm }) => {
                   required
                 >
                     <option value=''>Select Branch</option>
-                  <option value='CSE'>CSE</option>
-                  <option value='CSE AIML'>CSE AIML</option>
-                  <option value='CSE DS'>CSE DS</option>
-                  <option value='CSE HINDI'>CSE HINDI</option>
-                  <option value='CS'>CS</option>
-                  <option value='CSIT'>CSIT</option>
-                  <option value='IT'>IT</option>
-                  <option value='AIML'>AIML</option>
-                  <option value='ECE'>ECE</option>
+                    <option value='CE'>CE</option>
+                    <option value='CSE'>CSE</option>
+                    <option value='CSIT'>CSIT</option>
+                    <option value='CS'>CS</option>
+                    <option value='IT'>IT</option>
+                    <option value='EE'>EE</option>
+                    <option value='EEE'>EEE</option>
+                    <option value='ECE'>ECE</option>
+                    <option value='ME'>ME</option>
+                    <option value='CSE(AI)'>CSE (AI)</option>
+                    <option value='CSE(AIML)'>CSE (AIML)</option>
+                    <option value='CSE(DS)'>CSE (DS)</option>
+                    <option value='AIML'>AIML</option>
+                    <option value='CS(Hindi)'>CS (Hindi)</option>
                   
                 </select>
               </label>
@@ -140,9 +145,9 @@ const Registration = ({ formData, updateForm }) => {
                   required
                 >
                   <option value=''>Select gender</option>
-                  <option value='MALE'>MALE</option>
-                  <option value='FEMALE'>FEMALE</option>
-                  <option value='OTHER'>OTHER</option>
+                  <option value='Male'>Male</option>
+                  <option value='Female'>Female</option>
+                  <option value='Other'>Other</option>   
                  
                 </select>
               </label>
