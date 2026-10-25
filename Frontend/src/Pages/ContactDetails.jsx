@@ -1,14 +1,26 @@
 import { ArrowLeft, ArrowRight, Code2, Phone } from 'lucide-react'
+import ReCAPTCHA from 'react-google-recaptcha'
 import { useNavigate } from 'react-router-dom'
 import Layout from '../Components/Layout'
 
-const ContactDetails = ({ formData, updateForm }) => {
+const ContactDetails = ({
+  formData,
+  updateForm,
+  captchaToken,
+  setCaptchaToken,
+}) => {
   const navigate = useNavigate()
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    navigate('/success')
+ const handleSubmit = (event) => {
+  event.preventDefault()
+
+  if (!captchaToken) {
+    alert('Please complete the reCAPTCHA verification.')
+    return
   }
+
+  navigate('/success')
+}
 
   const inputStyle =
     'mt-2 w-full border border-gray-700 bg-[#171e18] px-3 py-2.5 text-sm text-white outline-none transition focus:border-green-500'
@@ -99,6 +111,15 @@ const ContactDetails = ({ formData, updateForm }) => {
           <div className='mt-6 border border-gray-800 bg-[#101510] p-3 text-xs leading-5 text-gray-400'>
             <span className='mr-2 text-green-400'>◆</span>
             Check your details before submitting.
+          </div>
+
+          <div className='mt-6 flex justify-center'>
+            <ReCAPTCHA
+            sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+            onChange={(token) => setCaptchaToken(token)}
+            theme='dark'
+            onExpired={() => setCaptchaToken(null)}
+            />
           </div>
 
           <div className='mt-6 flex flex-col-reverse gap-3 sm:flex-row'>

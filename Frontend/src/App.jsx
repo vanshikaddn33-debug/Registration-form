@@ -5,6 +5,7 @@ import ContactDetails from './pages/ContactDetails'
 import Success from './Pages/SuccessPage'
 
 const App = () => {
+  const [captchaToken, setCaptchaToken] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -41,6 +42,8 @@ const App = () => {
           <ContactDetails
             formData={formData}
             updateForm={updateForm}
+            captchaToken={captchaToken}
+            setCaptchaToken={setCaptchaToken}
           />
         }
       />
