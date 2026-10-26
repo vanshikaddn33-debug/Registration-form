@@ -38,7 +38,7 @@ Registration-form-new/
 │   │   ├── middleware/
 │   │   ├── models/
 │   │   └── routes/
-│   ├── .env
+│   ├── .env.example
 │   ├── package.json
 │   └── server.js
 │
@@ -55,7 +55,7 @@ Registration-form-new/
 │   │   ├── App.css
 │   │   ├── index.css
 │   │   └── main.jsx
-│   ├── .env
+│   ├── .env.example
 │   ├── package.json
 │   └── vite.config.js
 │
