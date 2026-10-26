@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import Registration from './pages/Registration'
-import ContactDetails from './pages/ContactDetails'
+import Registration from './Pages/Registration'
+import ContactDetails from './Pages/ContactDetails'
 import Success from './Pages/SuccessPage'
+
 
 const App = () => {
   const [captchaToken, setCaptchaToken] = useState(null);
