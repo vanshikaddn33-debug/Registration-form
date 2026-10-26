@@ -1,13 +1,58 @@
 import { ArrowLeft, ArrowRight, Code2, Phone } from 'lucide-react'
+import ReCAPTCHA from 'react-google-recaptcha'
+import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import Layout from '../Components/Layout'
 
-const ContactDetails = ({ formData, updateForm }) => {
+const ContactDetails = ({
+  formData,
+  updateForm,
+  captchaToken,
+  setCaptchaToken,
+}) => {
   const navigate = useNavigate()
 
-  const handleSubmit = (event) => {
+   const handleSubmit = async (event) => {
     event.preventDefault()
-    navigate('/success')
+
+    if (!captchaToken) {
+      alert('Please complete the reCAPTCHA verification.')
+      return
+    }
+
+    const registrationData = {
+      name: formData.name,
+      studentId: formData.studentId,
+      gender: formData.gender,
+      branch: formData.branch,
+      residence: formData.residence,
+      phoneNo: formData.phone,
+      email: formData.email,
+      githubUsername: formData.github,
+      year: formData.year,
+      laptop: formData.laptop,
+      captchaToken: captchaToken,
+    }
+
+    try {
+      const response = await axios.post(
+        'http://localhost:5000/api/students/register',
+        registrationData
+      )
+
+      console.log('Registration successful:', response.data)
+      navigate('/success')
+    } catch (error) {
+      console.error(
+        'Registration failed:',
+        error.response?.data || error.message
+      )
+
+      alert(
+        error.response?.data?.message ||
+          'Registration failed. Please try again.'
+      )
+    }
   }
 
   const inputStyle =
@@ -99,6 +144,15 @@ const ContactDetails = ({ formData, updateForm }) => {
           <div className='mt-6 border border-gray-800 bg-[#101510] p-3 text-xs leading-5 text-gray-400'>
             <span className='mr-2 text-green-400'>◆</span>
             Check your details before submitting.
+          </div>
+
+          <div className='mt-6 flex justify-center'>
+            <ReCAPTCHA
+            sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+            onChange={(token) => setCaptchaToken(token)}
+            theme='dark'
+            onExpired={() => setCaptchaToken(null)}
+            />
           </div>
 
           <div className='mt-6 flex flex-col-reverse gap-3 sm:flex-row'>

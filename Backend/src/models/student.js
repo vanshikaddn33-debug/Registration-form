@@ -25,11 +25,32 @@ const studentSchema = new mongoose.Schema(
       },
     },
 
-    branch: {
-      type: String,
-      required: [true, "Branch is required"],
-      trim: true,
-    },
+    
+branch: {
+  type: String,
+  required: [true, "Branch is required"],
+  trim: true,
+  enum: {
+    values: [
+      "CE",
+      "CSE",
+      "CSIT",
+      "CS",
+      "IT",
+      "EE",
+      "EEE",
+      "ECE",
+      "ME",
+      "CSE(AI)",
+      "CSE(AIML)",
+      "CSE(DS)",
+      "AIML",
+      "CS(Hindi)",
+    ],
+    message: "Please select a valid branch",
+  },
+},
+
 
     residence: {
       type: String,
@@ -50,13 +71,17 @@ const studentSchema = new mongoose.Schema(
     ],
 },
 
-    email: {
+     email: {
       type: String,
-      required: [true, "AKGEC email is required"],
+      required: [true, "Email is required"],
       unique: true,
       lowercase: true,
       trim: true,
-    },
+      match: [
+       /^[a-zA-Z0-9._%+-]+@akgec\.ac\.in$/i,
+       "Please use your AKGEC college email address",
+      ],
+     },
     githubUsername: {
       type: String,
       required: [true, "GitHub username is required"],
@@ -67,12 +92,12 @@ const studentSchema = new mongoose.Schema(
      ],
 },
     year: {
-      type: String,
+        type: String,
       required: [true, "Year is required"],
       enum: {
-        values: ["2nd Year", "3rd Year", "4th Year"],
-        message: "Invalid year",
-      },
+      values: ["1st Year", "2nd Year", "3rd Year", "4th Year"],
+      message: "Invalid year",
+   },
     },
     laptop: {
       type: String,
